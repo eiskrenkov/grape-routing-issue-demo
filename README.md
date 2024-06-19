@@ -20,4 +20,4 @@ will use grape v2.0.0 and will respond to `http://localhost:3000/up` correctly
 
 2. `(export SHOULD_WORK=false; bundle; bundle exec rails s)`
 
-will use grape v2.0.0 respond with 404
+will use grape v2.1.0 and respond with 404
