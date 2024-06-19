@@ -1,24 +1,23 @@
-# README
+# Ruby Grape v2.1.0 rouring priority issue demo
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+I'm mounting grape API in rails routes at the top of the file
 
-Things you may want to cover:
+```ruby
+Rails.application.routes.draw do
+  mount Twitter::Api => '/'
 
-* Ruby version
+  get "up" => "rails/health#show", as: :rails_health_check
+end
+```
 
-* System dependencies
+When i'm doing GET `http://localhost:3000/up` request in grape v2.0.0 it returns response correctly, but in grape v2.1.1 i'm getting 404 error. It seems like something was changed in route prioritising, it seems like if nothing matches grape's routes it doesn't continue the journey
 
-* Configuration
+## Steps to reproduce
 
-* Database creation
+1. `(export SHOULD_WORK=true; bundle; bundle exec rails s)`
 
-* Database initialization
+will use grape v2.0.0 and will respond to `http://localhost:3000/up` correctly
 
-* How to run the test suite
+2. `(export SHOULD_WORK=false; bundle; bundle exec rails s)`
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+will use grape v2.0.0 respond with 404
